@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: zipkin
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipkin-deployment
+  namespace: zipkin
+spec:
+  selector:
+    matchLabels:
+      app: zipkin
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: zipkin
+    spec:
+      containers:
+      - name: zipkin
+        resources:
+          limits:
+            ephemeral-storage: 1Gi
+          requests:
+            ephemeral-storage: 500Mi
+        image: openzipkin/zipkin:2.21.7
+        ports:
+        - containerPort: 9411
+        env:
+          - name: STORAGE_TYPE
+            value: elasticsearch
+          - name: ES_USERNAME
+            value: elastic
+          - name: ES_PASSWORD
+            value: <YOUR_PASSWORD_GOES_HERE>
+          - name: ES_HOSTS
+            value: http://<YOUR_HOST>:30200
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zipkin-svc
+  namespace: zipkin
+  labels: 
+    app: zipkin
+spec:
+  selector:
+      app: zipkin
+  type: NodePort
+  ports:
+  - port: 9411
+    nodePort: 30411

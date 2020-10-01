@@ -1,0 +1,36 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: quickstart
+  namespace: elastic-system
+spec:
+  version: 7.9.0
+  count: 1
+  elasticsearchRef:
+    name: quickstart
+    namespace: elastic-system
+  podTemplate:
+    spec:
+      containers:
+        - name: kibana
+          resources:
+            limits:
+              ephemeral-storage: 5Gi
+            requests:
+              ephemeral-storage: 2.5Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quickstart-kb-http
+  namespace: elastic-system
+  labels:
+    app: quickstart-kb
+spec:
+  selector:
+    app: quickstart-kb
+  type: NodePort
+  ports:
+    - port: 5601
+      nodePort: 30601
