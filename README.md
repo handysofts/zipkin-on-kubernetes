@@ -48,11 +48,11 @@ kubectl apply -f zipkin-kubernetes.yaml
 This will create namespace `zipkin`, two replicas of zipkin server and service which can be accessed from the outside on port `30411` (can be accessed from `http://<YOUR_HOST>:30411`)
 
 
-## 4. This step is optional but recommend to view what we have inside ES. So, now we can install and configure kibana to view our data inside ES:
+## 4. Install kibana. This step is an optional but recommended to view what we have inside ES:
 ```
 kubectl apply -f kibana-kubernetes.yaml
 ```
-This will install single kibana instance and export service on port `30601` (can be accessed from `http://<YOUR_HOST>:30601`)
+This will install single kibana instance and export service on port `30601` (can be accessed from `https://<YOUR_HOST>:30601`)
 
 Username by default is `elastic` and password can be obtained using below command:
 ```
