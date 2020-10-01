@@ -13,7 +13,7 @@ This will create namespace `elastic-system` and prepare everything in order to i
 ```
 kubectl apply -f elasticsearch-kubernetes.yaml
 ```
-This will create two valume for storing the data, install ElasticSearch on it and configure service. After successfully installation you will be able to access your ES on port `30200` from outside of your cluster. (`https://<YOUR_HOST>:30200`)
+This will create two valume for storing the data, install ElasticSearch on it and configure service. After successfully installation you will be able to access your ES on port `30200` from outside of your cluster. (`http://<YOUR_HOST>:30200`)
 
 Username by default is `elastic` and password can be obtained using below command:
 ```
