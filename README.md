@@ -2,14 +2,14 @@
 
 Here you can find ready to use zipkin yaml file which can be deployed via kubernetes and uses elastic-search cluster for saving the data. Please follow below steps in order to get successfully created zipkin cluster:
 
-1. Install ElasticSearch System:
+## 1. Install ElasticSearch System:
 ```
 kubectl apply -f https://download.elastic.co/downloads/eck/1.2.1/all-in-one.yaml
 ```
 This will create namespace `elastic-system` and prepare everything in order to install and configure ES automatically.
 
 
-2. Install elastic-search:
+## 2. Install elastic-search:
 ```
 kubectl apply -f elasticsearch-kubernetes.yaml
 ```
@@ -41,14 +41,14 @@ curl -u "elastic:$PASSWORD" -H "Content-Type: application/json" -XPOST "http://<
 ```
 
 
-3. Install Zipkin:
+## 3. Install Zipkin:
 ```
 kubectl apply -f zipkin-kubernetes.yaml
 ```
 This will create namespace `zipkin`, two replicas of zipkin server and service which can be accessed from the outside on port `30411` (can be accessed from `http://<YOUR_HOST>:30411`)
 
 
-4. This step is optional but recommend to view what we have inside ES. So, as this step we can install and configure kibana to view our data inside ES:
+## 4. This step is optional but recommend to view what we have inside ES. So, now we can install and configure kibana to view our data inside ES:
 ```
 kubectl apply -f kibana-kubernetes.yaml
 ```
